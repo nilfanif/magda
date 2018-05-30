@@ -131,6 +131,21 @@ class RecordHandler extends React.Component {
                     this.props.match.params.datasetId
                 )}`;
 
+                // redirect old CKAN URL slugs and UUIDs
+                if (
+                    this.props.dataset.identifier &&
+                    this.props.dataset.identifier !== "" &&
+                    this.props.dataset.identifier !==
+                        this.props.match.params.datasetId
+                ) {
+                    return (
+                        <Redirect
+                            to={`/dataset/${encodeURI(
+                                this.props.dataset.identifier
+                            )}/details?q=${searchText}`}
+                        />
+                    );
+                }
                 return (
                     <div itemScope itemType="http://schema.org/Dataset">
                         <h1 itemProp="name">{this.props.dataset.title}</h1>
@@ -174,6 +189,11 @@ class RecordHandler extends React.Component {
                                 <Redirect
                                     exact
                                     from="/dataset/:datasetId"
+                                    to={`${baseUrlDataset}/details?q=${searchText}`}
+                                />
+                                <Redirect
+                                    exact
+                                    from="/dataset/:datasetId/resource/*"
                                     to={`${baseUrlDataset}/details?q=${searchText}`}
                                 />
                             </Switch>

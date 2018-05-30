@@ -1,6 +1,7 @@
 ## 0.0.41
 
 *   Updated prettier config to not reformat package.json in to an invalid 4 space tab width.
+*   Added redirect for CKAN dataset URLs (UUID or slug) to their new canonical location
 
 ## 0.0.40
 
